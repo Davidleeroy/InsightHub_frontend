@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Review Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Pending Project Reviews</h1>
+
+<div id="pendingProjects"></div>
+
+<script>
+
+async function loadPending(){
+
+let res=
+await fetch(
+"http://localhost:5000/api/projects/admin/pending"
+);
+
+let data=
+await res.json();
+
+let html="";
+
+data.forEach(p=>{
+
+html+=`
+
+<div class="project-card">
+
+<h2>${p.title}</h2>
+
+<p>${p.student}</p>
+
+<p>${p.description}</p>
+
+
+<button onclick="approve(${p.id})">
+Approve
+</button>
+
+
+<button onclick="reject(${p.id})">
+Reject
+</button>
+
+
+<button onclick="removeProject(${p.id})">
+Delete
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"pendingProjects"
+).innerHTML=html;
+
+}
+
+
+
+async function approve(id){
+
+await fetch(
+"http://localhost:5000/api/projects/admin/approve/"+id,
+{
+method:"PUT"
+}
+);
+
+location.reload();
+
+}
+
+
+
+async function reject(id){
+
+await fetch(
+"http://localhost:5000/api/projects/admin/reject/"+id,
+{
+method:"PUT"
+}
+);
+
+location.reload();
+
+}
+
+
+
+async function removeProject(id){
+
+await fetch(
+"http://localhost:5000/api/projects/admin/delete/"+id,
+{
+method:"DELETE"
+}
+);
+
+location.reload();
+
+}
+
+
+loadPending();
+
+</script>
+
+</body>
+</html>

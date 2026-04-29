@@ -4,7 +4,7 @@ View Full Project
 </a>
 
 
-/* LOAD FULL PROJECT INFO */
+
 async function loadProject(){
 
 let params=
@@ -132,7 +132,7 @@ location.reload();
 window.onload=loadPendingProjects;
 
 
-/* BOOKMARK FEATURE */
+
 async function bookmarkProject(){
 
 await fetch(
@@ -154,7 +154,7 @@ alert("Project bookmarked");
 }
 
 
-/* REQUEST ACCESS */
+
 async function requestAccess(){
 
 await fetch(
@@ -177,7 +177,7 @@ alert("Access request sent");
 }
 
 
-/* COMMENTS / FEEDBACK */
+
 async function addComment(){
 
 let comment=
